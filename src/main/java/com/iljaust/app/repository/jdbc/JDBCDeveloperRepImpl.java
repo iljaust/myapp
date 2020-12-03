@@ -53,12 +53,14 @@ public class JDBCDeveloperRepImpl implements DeveloperRepository {
 
             preparedStatement = connection.prepareStatement(SELECT_BY_ID);
             preparedStatement.setLong(1,id);
-            preparedStatement2 = connection.prepareStatement(GET_SKILLS);
-            preparedStatement2.setLong(1,id);
-            preparedStatement3 = connection.prepareStatement(GET_ACCOUNT);
-            preparedStatement3.setLong(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
+
+            preparedStatement = connection.prepareStatement(GET_SKILLS);
+            preparedStatement.setLong(1,id);
             ResultSet resultSet2 = preparedStatement2.executeQuery();
+
+            preparedStatement = connection.prepareStatement(GET_ACCOUNT);
+            preparedStatement.setLong(1,id);
             ResultSet resultSet3 = preparedStatement3.executeQuery();
 
             if (resultSet.next()){

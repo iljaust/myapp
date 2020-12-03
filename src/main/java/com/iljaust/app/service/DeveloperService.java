@@ -1,17 +1,19 @@
 package com.iljaust.app.service;
 
-import com.iljaust.app.model.Account;
 import com.iljaust.app.model.Developer;
+import com.iljaust.app.repository.DeveloperRepository;
 import com.iljaust.app.repository.jdbc.JDBCDeveloperRepImpl;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeveloperService {
-    private JDBCDeveloperRepImpl jdbcDeveloperRep = new JDBCDeveloperRepImpl();
+    private DeveloperRepository developerRepository = new JDBCDeveloperRepImpl();
 
-    public DeveloperService(JDBCDeveloperRepImpl jdbcDeveloperRep){
+    public DeveloperService(JDBCDeveloperRepImpl DeveloperRepository){
 
-        this.jdbcDeveloperRep = jdbcDeveloperRep;
+        this.developerRepository = DeveloperRepository;
     }
 
     public DeveloperService(){
@@ -20,27 +22,33 @@ public class DeveloperService {
 
     public List<Developer> getAll(){
 
-        return jdbcDeveloperRep.getAll();
+        try {
+            return developerRepository.getAll();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return new ArrayList<>();
     }
 
     public Developer update(Developer developer) {
 
-        return jdbcDeveloperRep.update(developer);
+        return developerRepository.update(developer);
     }
 
     public void deleteById(Long id) {
 
-        jdbcDeveloperRep.deleteById(id);
+        developerRepository.deleteById(id);
     }
 
     public Developer save(Developer developer) {
 
-        jdbcDeveloperRep.save(developer);
+        developerRepository.save(developer);
         return developer;
     }
 
     public Developer getById(Long id) {
 
-        return jdbcDeveloperRep.getById(id);
+        return developerRepository.getById(id);
     }
 }

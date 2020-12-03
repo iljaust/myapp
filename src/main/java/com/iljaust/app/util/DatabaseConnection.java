@@ -7,20 +7,19 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static Connection con = null;
 
-    static
-    {
-        String url = "jdbc:mysql://localhost/myapp";
-        String user = "root";
-        String pass = "1234";
-        try {
-            con = DriverManager.getConnection(url, user, pass);
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    static String url = "jdbc:mysql://localhost/myapp";
+    static  String user = "root";
+    static  String pass = "1234";
+
     public static Connection getConnection()
     {
+        if(con == null) {
+            try {
+                con = DriverManager.getConnection(url, user, pass);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return con;
     }
 }

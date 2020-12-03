@@ -1,17 +1,20 @@
 package com.iljaust.app.service;
 
 import com.iljaust.app.model.Account;
+import com.iljaust.app.repository.AccountRepository;
 import com.iljaust.app.repository.jdbc.JDBCAccountRepIpml;
 
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountService {
-    private JDBCAccountRepIpml jdbcAccountRepIpml = new JDBCAccountRepIpml();
+    private AccountRepository accountRepository = new JDBCAccountRepIpml();
 
-    public AccountService(JDBCAccountRepIpml jdbcAccountRepIpml){
+    public AccountService(JDBCAccountRepIpml accountRepository){
 
-        this.jdbcAccountRepIpml = jdbcAccountRepIpml;
+        this.accountRepository = accountRepository;
     }
 
     public AccountService(){
@@ -19,32 +22,37 @@ public class AccountService {
 
     public List<Account> getAll(){
 
-        return jdbcAccountRepIpml.getAll();
+        try {
+            return accountRepository.getAll();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
+        return new ArrayList<>();
     }
 
     public Account update(Account account) {
 
-        return jdbcAccountRepIpml.update(account);
+        return accountRepository.update(account);
 
     }
 
     public void deleteById(Long id) {
 
-        jdbcAccountRepIpml.deleteById(id);
+        accountRepository.deleteById(id);
 
     }
 
     public Account save(Account account) {
 
-        jdbcAccountRepIpml.save(account);
+        accountRepository.save(account);
         return account;
 
     }
 
     public Account getById(Long id) {
 
-        return jdbcAccountRepIpml.getById(id);
+        return accountRepository.getById(id);
 
     }
 }

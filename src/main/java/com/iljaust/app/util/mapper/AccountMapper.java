@@ -2,8 +2,6 @@ package com.iljaust.app.util.mapper;
 
 import com.iljaust.app.model.Account;
 import com.iljaust.app.model.AccountStatus;
-import com.iljaust.app.model.Skill;
-import liquibase.pro.packaged.A;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +16,6 @@ public class AccountMapper {
 
 
             return account;
-
-
-
+            
     }
 }
